@@ -34,7 +34,7 @@ q)	??Input and output files must be 80 characters in length??	Assumed: Max 	P6S1
 #include <iostream>
 // #include <ofstream>
 #include <fstream>
-#include "classSplitString.h"
+#include <sstream>
 using namespace std;
 
 int main () {
@@ -110,20 +110,18 @@ k)	Line limit	80 characters													P3S5
  */
 
   cout << "###LINE BEFORE PROCESSING## \n" << strInLine << "##########" << endl;
-  // classSplitString.splitstring()
-	splitstring strOutput(strInLine);
 
-    // splits and displays the vector of strings
-    vector<string> flds = strOutput.split(' ');
-    for (int k = 0; k < flds.size(); k++)
-        cout << k << " => " << flds[k] << endl;
-
-    // now taking account of repeated delimiters
-    cout << endl << "with repeated delimiters:" << endl;
-    vector<string> flds2 = strOutput.split(' ', 1);
-    for (int k = 0; k < flds2.size(); k++)
-        cout << k << " => " << flds2[k] << endl;
-	
+    string arr[40];
+    int i = 0;
+    stringstream strOutput(strInLine);
+    while (strOutput.good() && i < 40){
+        strOutput >> arr[i];
+        ++i;
+    }
+    for(i = 0; i < 40; i++){
+        cout << arr[i] << endl;
+    }
+    
  		// do something about lines that dont have 80 characters but have not reached margins
 	// @OutLines = split strProcessed on carriage return
 	// while (@OutLines)... 
